@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Istos AI - Futuristic Web Builder powered by artificial intelligence.">
+    <title>Istos AI | Futuristic Web Builder</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <div class="stars-container"></div>
+
+    <section id="home" class="page active">
+
+        <div class="hero">
+
+            <div class="glitch-wrapper">
+                <h1 id="istos-logo" class="glitch" data-text="ISTOS AI">
+                    ISTOS AI
+                </h1>
+            </div>
+
+            <p id="typewriter" class="hero-subtitle"></p>
+
+            <div class="btn-group">
+
+                <button id="start-btn" class="btn cyan" onclick="showPage('builder')">
+                    Começar Projeto
+                </button>
+
+                <button id="acc-btn" class="btn magenta" onclick="showPage('account')">
+                    Minha Conta
+                </button>
+
+                <button id="plans-btn" class="btn purple" onclick="showPage('plans')">
+                    Ver Planos
+                </button>
+
+                <button class="btn language-btn" onclick="toggleLanguage()">
+                    🌎 <span id="lang-text">EN</span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section id="builder" class="page">
+
+        <nav class="sidebar-ia">
+
+            <div class="top-section">
+
+                <h3>Istos Chat IA</h3>
+
+                <div class="chat-box" id="chat-box">
+                    <div class="msg-ai">
+                        Olá! Eu sou a Istos AI. Como posso projetar seu site hoje?
+                    </div>
+                </div>
+
+                <div class="chat-input-wrapper">
+                    <input type="text"
+                           id="ai-input"
+                           autocomplete="off"
+                           placeholder="Ex: 'Crie um botão neon'...">
+                </div>
+
+            </div>
+
+            <div class="bottom-section">
+
+                <h3>Widgets</h3>
+
+                <div class="widgets-container">
+
+                    <div class="widget" onclick="addElement('Texto')">
+                        <i data-lucide="type"></i>
+                        <span>Texto</span>
+                    </div>
+
+                    <div class="widget" onclick="addElement('Botão')">
+                        <i data-lucide="mouse-pointer-2"></i>
+                        <span>Botão</span>
+                    </div>
+
+                    <div class="widget" onclick="addElement('Card')">
+                        <i data-lucide="layout"></i>
+                        <span>Card</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <main class="canvas-area">
+
+            <header class="canvas-top">
+
+                <button class="btn-back" onclick="showPage('home')">
+                    ← Voltar
+                </button>
+
+                <span class="editor-title">
+                    Editor Istos Pro
+                </span>
+
+            </header>
+
+            <div class="drop-zone" id="canvas">
+                <div class="placeholder-text">
+                    Clique em um widget ou peça para a Istos AI.
+                </div>
+            </div>
+
+            <aside class="properties-panel" id="editor-side">
+
+                <h4>Editor de Elemento</h4>
+
+                <div id="controls">
+                    <p class="no-selection-msg">
+                        Selecione um item no canvas para editar.
+                    </p>
+                </div>
+
+            </aside>
+
+        </main>
+
+    </section>
+
+    <section id="account" class="page">
+
+        <div class="card-account">
+
+            <button class="btn-back" onclick="showPage('home')">
+                ← Sair
+            </button>
+
+            <div class="profile-pic"></div>
+
+            <h2>Admin User</h2>
+
+            <span class="badge-platinum">
+                PLATINUM MEMBER
+            </span>
+
+            <div class="info">
+                <p>E-mail: contato@empresa.com</p>
+                <p>Plano Atual: <span class="neon-cyan-text">Platinum</span></p>
+                <p>Sites Ativos: 12</p>
+                <p>Uso da IA: 78% (Ilimitado)</p>
+            </div>
+
+            <h3>Histórico de Criações</h3>
+
+            <ul class="creation-history">
+                <li>
+                    <span class="neon-cyan-text">Site Portfólio</span> - 20/10/2023
+                </li>
+                <li>
+                    <span class="neon-magenta-text">Landing Page</span> - 15/09/2023
+                </li>
+                <li>
+                    <span class="neon-purple-text">Blog Corporativo</span> - 01/08/2023
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <section id="plans" class="page">
+
+        <button class="btn-back" onclick="showPage('home')">
+            ← Voltar
+        </button>
+
+        <div class="plans-container">
+
+            <div class="plan-card free">
+                <h3>Free</h3>
+                <p class="price">R$ 0/mês</p>
+                <ul>
+                    <li>1 Site</li>
+                    <li>Uso Básico da IA</li>
+                </ul>
+                <button class="btn cyan">Selecionar</button>
+            </div>
+            <div class="plan-card basic">
+                <h3>Basic</h3>
+                <p class="price">R$ 49/mês</p>
+                <ul>
+                    <li>5 Sites</li>
+                    <li>Uso Moderado</li>
+                </ul>
+                <button class="btn magenta">Selecionar</button>
+            </div>
+            <div class="plan-card platinum">
+                <h3>Platinum</h3>
+                <p class="price">R$ 499/mês</p>
+                <ul>
+                    <li>Ilimitado</li>
+                    <li class="neon-magenta-text">Suporte VIP</li>
+                </ul>
+                <button class="btn platinum-btn">
+                    Plano Atual
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof lucide !== "undefined") {
+                lucide.createIcons();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
