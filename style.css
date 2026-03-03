@@ -110,6 +110,10 @@ p {
 ================================ */
 
 .btn {
+    margin-top: 15px;
+    text-decoration: none; /* Remove o sublinhado do link */
+    display: inline-block; /* Garante que o link aceite tamanhos de botão */
+    text-align: center;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
@@ -204,6 +208,15 @@ p {
 ================================ */
 
 #home {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+}
+
+#intro {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
