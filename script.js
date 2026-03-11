@@ -161,22 +161,69 @@ function simulateAITyping() {
 ===================================================== */
 
 function addElement(type) {
-    const canvas = document.getElementById("canvas");
-    if (!canvas) return;
+    const canvas = document.querySelector('.canvas-area');
+    const novoElemento = document.createElement('div');
 
     removePlaceholder();
+    
+    // Configura o visual do elemento criado
+    novoElemento.className = 'element-on-canvas';
+    novoElemento.innerHTML = `<span>${type}</span>`; // Usa o tipo vindo do onclick
+    
+    // Define posição inicial absoluta dentro do canvas
+    novoElemento.style.position = 'absolute';
+    novoElemento.style.top = '50px';
+    novoElemento.style.left = '50px';
 
-    const el = document.createElement("div");
-    el.className = "dropped-element";
+    let isDragging = false;
+    let offsetX, offsetY;
 
-    applyElementStyle(el, type);
-
-    el.addEventListener("click", (e) => {
-        e.stopPropagation();
-        selectElement(el);
+    // Início do arraste: quando o usuário clica no elemento
+    novoElemento.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        // Calcula a distância entre o clique e a borda do elemento para não "pular"
+        offsetX = e.clientX - novoElemento.offsetLeft;
+        offsetY = e.clientY - novoElemento.offsetTop;
+        novoElemento.style.cursor = 'grabbing';
     });
 
-    canvas.appendChild(el);
+    // Movimentação: ocorre no documento todo para não perder o foco se mover rápido
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const header = document.querySelector('.canvas-top');
+        const headerHeight = header.offsetHeight; // Mede a altura real do seu topo
+
+        let x = e.clientX - offsetX;
+        let y = e.clientY - offsetY;
+
+        const maxX = rect.width - novoElemento.offsetWidth;
+        const maxY = rect.height - novoElemento.offsetHeight;
+
+        // --- A MÁGICA ACONTECE AQUI ---
+        x = Math.max(0, Math.min(x, maxX));
+        // O y agora não pode ser menor que a altura do header
+        y = Math.max(headerHeight, Math.min(y, maxY)); 
+
+        novoElemento.style.left = x + 'px';
+        novoElemento.style.top = y + 'px';
+    });
+
+    // Fim do arraste: quando solta o botão do mouse
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        novoElemento.style.cursor = 'grab';
+    });
+
+    applyElementStyle(novoElemento, type);
+
+    novoElemento.addEventListener("click", (e) => {
+        e.stopPropagation();
+        selectElement(novoElemento);
+    });
+
+    canvas.appendChild(novoElemento); // Coloca o elemento no "palco"
 }
 
 function applyElementStyle(el, type) {
